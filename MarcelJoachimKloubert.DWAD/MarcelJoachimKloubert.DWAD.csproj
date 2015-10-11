@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0C878352-4AB1-49F4-BEEA-9AA82A48A86C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MarcelJoachimKloubert.DWAD</RootNamespace>
+    <AssemblyName>MarcelJoachimKloubert.DWAD</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Debug\MarcelJoachimKloubert.DWAD.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>MarcelJoachimKloubert.DWAD.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DisposableBase.cs" />
+    <Compile Include="ErrorEventArgs.cs" />
+    <Compile Include="IWADFile.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WADFileFactory.cs" />
+    <Compile Include="WADFormat.cs" />
+    <Compile Include="WADObject.cs" />
+    <Compile Include="WADs\Lumps\ILump.cs" />
+    <Compile Include="WADs\Lumps\Things\DOOMThingFlags.cs" />
+    <Compile Include="WADs\Lumps\Things\DOOMThingType.cs" />
+    <Compile Include="WADs\Lumps\Things\IDOOMThing.cs" />
+    <Compile Include="WADs\Lumps\Things\UnknownDOOMThing.cs" />
+    <Compile Include="WADs\Lumps\Things\UnknownThing.cs" />
+    <Compile Include="WADs\Lumps\Things\IThing.cs" />
+    <Compile Include="WADs\Lumps\Things\IThingsLump.cs" />
+    <Compile Include="WADs\Lumps\Things\ThingsLump.cs" />
+    <Compile Include="WADs\Lumps\UnknownLump.cs" />
+    <Compile Include="WADs\PWAD.cs" />
+    <Compile Include="WADs\IWAD.cs" />
+    <Compile Include="WADs\WADFileBase.cs" />
+    <Compile Include="WADType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\LICENSE">
+      <Link>LICENSE</Link>
+    </EmbeddedResource>
+    <None Include="MarcelJoachimKloubert.DWAD.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="uds.1666.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

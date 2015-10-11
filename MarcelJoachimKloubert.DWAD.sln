@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcelJoachimKloubert.DWAD", "MarcelJoachimKloubert.DWAD\MarcelJoachimKloubert.DWAD.csproj", "{0C878352-4AB1-49F4-BEEA-9AA82A48A86C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcelJoachimKloubert.DWAD.Test", "MarcelJoachimKloubert.DWAD.Test\MarcelJoachimKloubert.DWAD.Test.csproj", "{611F815F-9AD6-41FB-9967-FB7249D20515}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C878352-4AB1-49F4-BEEA-9AA82A48A86C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C878352-4AB1-49F4-BEEA-9AA82A48A86C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C878352-4AB1-49F4-BEEA-9AA82A48A86C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C878352-4AB1-49F4-BEEA-9AA82A48A86C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{611F815F-9AD6-41FB-9967-FB7249D20515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{611F815F-9AD6-41FB-9967-FB7249D20515}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{611F815F-9AD6-41FB-9967-FB7249D20515}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{611F815F-9AD6-41FB-9967-FB7249D20515}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
