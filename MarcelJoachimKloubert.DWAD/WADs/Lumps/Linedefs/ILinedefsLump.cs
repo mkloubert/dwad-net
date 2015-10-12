@@ -27,36 +27,23 @@
  *                                                                                                                    *
  **********************************************************************************************************************/
 
-using System.IO;
+using System.Collections.Generic;
 
-namespace MarcelJoachimKloubert.DWAD.WADs
+namespace MarcelJoachimKloubert.DWAD.WADs.Lumps.Linedefs
 {
     /// <summary>
-    /// A PWAD file.
+    /// Lump for LINEDEFS.
     /// </summary>
-    public sealed class PWAD : WADFileBase
+    public interface ILinedefsLump : ILump
     {
-        #region Constructors (1)
-
-        internal PWAD(WADFormat format, Stream stream, bool ownsStream = true, object sync = null)
-            : base(format: format,
-                   stream: stream, ownsStream: ownsStream,
-                   sync: sync)
-        {
-        }
-
-        #endregion Constructors (1)
-
-        #region Properties (1)
+        #region Methods (1)
 
         /// <summary>
-        /// <see cref="WADFileBase.Type" />
+        /// Returns a list of line definition entries.
         /// </summary>
-        public override sealed WADType Type
-        {
-            get { return WADType.PWAD; }
-        }
+        /// <returns>The list of line definitions.</returns>
+        IEnumerable<ILinedef> EnumerateLinedefs();
 
-        #endregion Properties (1)
+        #endregion Methods (1)
     }
 }

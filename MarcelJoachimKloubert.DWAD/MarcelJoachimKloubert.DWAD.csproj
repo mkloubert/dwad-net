@@ -51,6 +51,10 @@
     <Compile Include="WADFormat.cs" />
     <Compile Include="WADObject.cs" />
     <Compile Include="WADs\Lumps\ILump.cs" />
+    <Compile Include="WADs\Lumps\Linedefs\ILinedef.cs" />
+    <Compile Include="WADs\Lumps\Linedefs\ILinedefsLump.cs" />
+    <Compile Include="WADs\Lumps\Linedefs\Linedef.cs" />
+    <Compile Include="WADs\Lumps\Linedefs\LinedefsLump.cs" />
     <Compile Include="WADs\Lumps\Things\DOOMThingFlags.cs" />
     <Compile Include="WADs\Lumps\Things\DOOMThingType.cs" />
     <Compile Include="WADs\Lumps\Things\IDOOMThing.cs" />
@@ -60,6 +64,10 @@
     <Compile Include="WADs\Lumps\Things\IThingsLump.cs" />
     <Compile Include="WADs\Lumps\Things\ThingsLump.cs" />
     <Compile Include="WADs\Lumps\UnknownLump.cs" />
+    <Compile Include="WADs\Lumps\Vertexes\IVertex.cs" />
+    <Compile Include="WADs\Lumps\Vertexes\IVertexesLump.cs" />
+    <Compile Include="WADs\Lumps\Vertexes\VertexesLump.cs" />
+    <Compile Include="WADs\Lumps\Vertexes\Vertex.cs" />
     <Compile Include="WADs\PWAD.cs" />
     <Compile Include="WADs\IWAD.cs" />
     <Compile Include="WADs\WADFileBase.cs" />

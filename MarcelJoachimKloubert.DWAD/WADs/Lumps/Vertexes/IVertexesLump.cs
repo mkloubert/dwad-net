@@ -27,35 +27,33 @@
  *                                                                                                                    *
  **********************************************************************************************************************/
 
-using System.IO;
+using System.Collections.Generic;
 
-namespace MarcelJoachimKloubert.DWAD.WADs
+namespace MarcelJoachimKloubert.DWAD.WADs.Lumps.Vertexes
 {
     /// <summary>
-    /// A PWAD file.
+    /// Lump for VERTEXES.
     /// </summary>
-    public sealed class PWAD : WADFileBase
+    public interface IVertexesLump : ILump
     {
-        #region Constructors (1)
+        #region Methods (1)
 
-        internal PWAD(WADFormat format, Stream stream, bool ownsStream = true, object sync = null)
-            : base(format: format,
-                   stream: stream, ownsStream: ownsStream,
-                   sync: sync)
-        {
-        }
+        /// <summary>
+        /// Enumerates over the list of vertexes.
+        /// </summary>
+        /// <returns>The list of vertexes.</returns>
+        IEnumerable<IVertex> EnumerateVertexes();
 
-        #endregion Constructors (1)
+        #endregion Methods (1)
 
         #region Properties (1)
 
         /// <summary>
-        /// <see cref="WADFileBase.Type" />
+        /// Returns a specific vertex.
         /// </summary>
-        public override sealed WADType Type
-        {
-            get { return WADType.PWAD; }
-        }
+        /// <param name="index">THe index of the vertex.</param>
+        /// <returns>The vertex or <see langword="null" /> if not found.</returns>
+        IVertex this[int index] { get; }
 
         #endregion Properties (1)
     }

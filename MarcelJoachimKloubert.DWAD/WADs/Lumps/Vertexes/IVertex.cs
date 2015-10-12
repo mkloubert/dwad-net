@@ -27,36 +27,30 @@
  *                                                                                                                    *
  **********************************************************************************************************************/
 
-using System.IO;
-
-namespace MarcelJoachimKloubert.DWAD.WADs
+namespace MarcelJoachimKloubert.DWAD.WADs.Lumps.Vertexes
 {
     /// <summary>
-    /// A PWAD file.
+    /// Describes a vertex.
     /// </summary>
-    public sealed class PWAD : WADFileBase
+    public interface IVertex
     {
-        #region Constructors (1)
-
-        internal PWAD(WADFormat format, Stream stream, bool ownsStream = true, object sync = null)
-            : base(format: format,
-                   stream: stream, ownsStream: ownsStream,
-                   sync: sync)
-        {
-        }
-
-        #endregion Constructors (1)
-
-        #region Properties (1)
+        #region Properties (3)
 
         /// <summary>
-        /// <see cref="WADFileBase.Type" />
+        /// Gets the underlying lump.
         /// </summary>
-        public override sealed WADType Type
-        {
-            get { return WADType.PWAD; }
-        }
+        IVertexesLump Lump { get; }
 
-        #endregion Properties (1)
+        /// <summary>
+        /// Gets the X coordinate.
+        /// </summary>
+        short X { get; }
+
+        /// <summary>
+        /// Gets the X coordinate.
+        /// </summary>
+        short Y { get; }
+
+        #endregion Properties (3)
     }
 }

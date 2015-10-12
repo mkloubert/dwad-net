@@ -30,7 +30,7 @@
 namespace MarcelJoachimKloubert.DWAD.WADs.Lumps.Things
 {
     /// <summary>
-    /// List of knowb
+    /// List of known DOOM things (<see href="http://doom.wikia.com/wiki/Thing_types" />).
     /// </summary>
     public enum DOOMThingType : short
     {

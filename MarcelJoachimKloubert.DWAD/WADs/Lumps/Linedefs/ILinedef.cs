@@ -27,36 +27,37 @@
  *                                                                                                                    *
  **********************************************************************************************************************/
 
-using System.IO;
+using MarcelJoachimKloubert.DWAD.WADs.Lumps.Vertexes;
 
-namespace MarcelJoachimKloubert.DWAD.WADs
+namespace MarcelJoachimKloubert.DWAD.WADs.Lumps.Linedefs
 {
     /// <summary>
-    /// A PWAD file.
+    /// Describes a line definition.
     /// </summary>
-    public sealed class PWAD : WADFileBase
+    public interface ILinedef
     {
-        #region Constructors (1)
-
-        internal PWAD(WADFormat format, Stream stream, bool ownsStream = true, object sync = null)
-            : base(format: format,
-                   stream: stream, ownsStream: ownsStream,
-                   sync: sync)
-        {
-        }
-
-        #endregion Constructors (1)
-
-        #region Properties (1)
+        #region Properties (4)
 
         /// <summary>
-        /// <see cref="WADFileBase.Type" />
+        /// Gets the end vertex.
         /// </summary>
-        public override sealed WADType Type
-        {
-            get { return WADType.PWAD; }
-        }
+        IVertex End { get; }
 
-        #endregion Properties (1)
+        /// <summary>
+        /// Gets the length between <see cref="ILinedef.Start" /> and <see cref="ILinedef.End" />.
+        /// </summary>
+        double Length { get; }
+
+        /// <summary>
+        /// Gets the underyling lump.
+        /// </summary>
+        ILinedefsLump Lump { get; }
+
+        /// <summary>
+        /// Gets the start vertex.
+        /// </summary>
+        IVertex Start { get; }
+
+        #endregion Properties (4)
     }
 }

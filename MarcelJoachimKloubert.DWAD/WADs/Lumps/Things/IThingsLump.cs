@@ -27,10 +27,7 @@
  *                                                                                                                    *
  **********************************************************************************************************************/
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MarcelJoachimKloubert.DWAD.WADs.Lumps.Things
 {
@@ -42,11 +39,11 @@ namespace MarcelJoachimKloubert.DWAD.WADs.Lumps.Things
         #region Methods (1)
 
         /// <summary>
-        /// Enumerates all 
+        /// Enumerates all
         /// </summary>
         /// <returns></returns>
         IEnumerable<IThing> EnumerateThings();
 
-        #endregion
+        #endregion Methods (1)
     }
 }

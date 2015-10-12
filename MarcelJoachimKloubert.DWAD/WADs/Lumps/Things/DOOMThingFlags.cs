@@ -32,7 +32,7 @@ using System;
 namespace MarcelJoachimKloubert.DWAD.WADs.Lumps.Things
 {
     /// <summary>
-    /// List of DOOM flags for an <see cref="IDOOMThing" />.
+    /// List of DOOM flags for an <see cref="IDOOMThing" /> (<see href="http://doom.wikia.com/wiki/Thing" />).
     /// </summary>
     [Flags]
     public enum DOOMThingFlags : short

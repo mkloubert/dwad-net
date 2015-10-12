@@ -27,36 +27,24 @@
  *                                                                                                                    *
  **********************************************************************************************************************/
 
-using System.IO;
+using MarcelJoachimKloubert.DWAD.MapViewer.Forms;
+using System;
+using System.Windows.Forms;
 
-namespace MarcelJoachimKloubert.DWAD.WADs
+namespace MarcelJoachimKloubert.DWAD.MapViewer
 {
-    /// <summary>
-    /// A PWAD file.
-    /// </summary>
-    public sealed class PWAD : WADFileBase
+    internal static class Program
     {
-        #region Constructors (1)
+        #region Methods (1)
 
-        internal PWAD(WADFormat format, Stream stream, bool ownsStream = true, object sync = null)
-            : base(format: format,
-                   stream: stream, ownsStream: ownsStream,
-                   sync: sync)
+        [STAThread]
+        private static void Main()
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new MainForm());
         }
 
-        #endregion Constructors (1)
-
-        #region Properties (1)
-
-        /// <summary>
-        /// <see cref="WADFileBase.Type" />
-        /// </summary>
-        public override sealed WADType Type
-        {
-            get { return WADType.PWAD; }
-        }
-
-        #endregion Properties (1)
+        #endregion Methods (1)
     }
 }

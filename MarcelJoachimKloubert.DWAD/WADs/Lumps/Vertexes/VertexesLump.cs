@@ -27,36 +27,69 @@
  *                                                                                                                    *
  **********************************************************************************************************************/
 
-using System.IO;
+using MarcelJoachimKloubert.DWAD.WADs.Lumps.Vertexes;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MarcelJoachimKloubert.DWAD.WADs
 {
-    /// <summary>
-    /// A PWAD file.
-    /// </summary>
-    public sealed class PWAD : WADFileBase
+    partial class WADFileBase
     {
-        #region Constructors (1)
-
-        internal PWAD(WADFormat format, Stream stream, bool ownsStream = true, object sync = null)
-            : base(format: format,
-                   stream: stream, ownsStream: ownsStream,
-                   sync: sync)
+        internal class VertexesLump : UnknownLump, IVertexesLump
         {
+            #region Methods (1)
+
+            public IEnumerable<IVertex> EnumerateVertexes()
+            {
+                using (var stream = this.GetStream())
+                {
+                    bool hasNext;
+
+                    do
+                    {
+                        hasNext = false;
+
+                        byte[] buffer;
+
+                        buffer = new byte[2];
+                        if (stream.Read(buffer, 0, buffer.Length) != buffer.Length)
+                        {
+                            continue;
+                        }
+
+                        var x = ToInt16(buffer).Value;
+
+                        buffer = new byte[2];
+                        if (stream.Read(buffer, 0, buffer.Length) != buffer.Length)
+                        {
+                            continue;
+                        }
+
+                        var y = ToInt16(buffer).Value;
+
+                        hasNext = true;
+
+                        yield return new Vertex()
+                        {
+                            Lump = this,
+                            X = x,
+                            Y = y,
+                        };
+                    }
+                    while (hasNext);
+                }
+            }
+
+            #endregion Methods (1)
+
+            #region Properties (1)
+
+            public IVertex this[int index]
+            {
+                get { return this.EnumerateVertexes().Skip(index).FirstOrDefault(); }
+            }
+
+            #endregion Properties (1)
         }
-
-        #endregion Constructors (1)
-
-        #region Properties (1)
-
-        /// <summary>
-        /// <see cref="WADFileBase.Type" />
-        /// </summary>
-        public override sealed WADType Type
-        {
-            get { return WADType.PWAD; }
-        }
-
-        #endregion Properties (1)
     }
 }

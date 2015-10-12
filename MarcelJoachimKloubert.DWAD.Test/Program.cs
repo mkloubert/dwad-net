@@ -28,6 +28,7 @@
  **********************************************************************************************************************/
 
 using MarcelJoachimKloubert.DWAD.WADs.Lumps.Things;
+using MarcelJoachimKloubert.DWAD.WADs.Lumps.Vertexes;
 using System;
 using System.IO;
 
@@ -62,8 +63,17 @@ namespace MarcelJoachimKloubert.DWAD.Test
                                             var doomThing = (IDOOMThing)thing;
                                             if (doomThing != null)
                                             {
-
                                             }
+                                        }
+                                    }
+                                }
+                                else if (lump is IVertexesLump)
+                                {
+                                    foreach (var vertex in ((IVertexesLump)lump).EnumerateVertexes())
+                                    {
+                                        if (vertex != null)
+                                        {
+
                                         }
                                     }
                                 }

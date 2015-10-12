@@ -27,36 +27,62 @@
  *                                                                                                                    *
  **********************************************************************************************************************/
 
-using System.IO;
+using MarcelJoachimKloubert.DWAD.WADs.Lumps.Linedefs;
+using MarcelJoachimKloubert.DWAD.WADs.Lumps.Vertexes;
+using System;
 
 namespace MarcelJoachimKloubert.DWAD.WADs
 {
-    /// <summary>
-    /// A PWAD file.
-    /// </summary>
-    public sealed class PWAD : WADFileBase
+    partial class WADFileBase
     {
-        #region Constructors (1)
-
-        internal PWAD(WADFormat format, Stream stream, bool ownsStream = true, object sync = null)
-            : base(format: format,
-                   stream: stream, ownsStream: ownsStream,
-                   sync: sync)
+        internal class Linedef : WADObject, ILinedef
         {
+            #region Properties (5)
+
+            public IVertex End
+            {
+                get;
+                internal set;
+            }
+
+            public double Length
+            {
+                get
+                {
+                    // start coordinates
+                    var x1 = this.Start.X;
+                    var y1 = this.Start.Y;
+
+                    // end coordinates
+                    var x2 = this.End.X;
+                    var y2 = this.End.Y;
+
+                    var a = Math.Abs(x1 - x2);
+                    var b = Math.Abs(y1 - y2);
+
+                    // c
+                    return Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
+                }
+            }
+
+            internal LinedefsLump Lump
+            {
+                get;
+                set;
+            }
+
+            ILinedefsLump ILinedef.Lump
+            {
+                get { return this.Lump; }
+            }
+
+            public IVertex Start
+            {
+                get;
+                internal set;
+            }
+
+            #endregion Properties (5)
         }
-
-        #endregion Constructors (1)
-
-        #region Properties (1)
-
-        /// <summary>
-        /// <see cref="WADFileBase.Type" />
-        /// </summary>
-        public override sealed WADType Type
-        {
-            get { return WADType.PWAD; }
-        }
-
-        #endregion Properties (1)
     }
 }

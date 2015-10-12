@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcelJoachimKloubert.DWAD"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcelJoachimKloubert.DWAD.Test", "MarcelJoachimKloubert.DWAD.Test\MarcelJoachimKloubert.DWAD.Test.csproj", "{611F815F-9AD6-41FB-9967-FB7249D20515}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcelJoachimKloubert.DWAD.MapViewer", "MarcelJoachimKloubert.DWAD.MapViewer\MarcelJoachimKloubert.DWAD.MapViewer.csproj", "{79E6FE06-7F65-418A-9BFC-5E4C1A5DDEB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{611F815F-9AD6-41FB-9967-FB7249D20515}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{611F815F-9AD6-41FB-9967-FB7249D20515}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{611F815F-9AD6-41FB-9967-FB7249D20515}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79E6FE06-7F65-418A-9BFC-5E4C1A5DDEB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79E6FE06-7F65-418A-9BFC-5E4C1A5DDEB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79E6FE06-7F65-418A-9BFC-5E4C1A5DDEB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79E6FE06-7F65-418A-9BFC-5E4C1A5DDEB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

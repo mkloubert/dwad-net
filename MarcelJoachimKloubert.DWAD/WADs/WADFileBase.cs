@@ -207,8 +207,16 @@ namespace MarcelJoachimKloubert.DWAD.WADs
 
                 switch (lumpName.ToUpper().Trim())
                 {
+                    case "LINEDEFS":
+                        lumpType = typeof(LinedefsLump);
+                        break;
+
                     case "THINGS":
                         lumpType = typeof(ThingsLump);
+                        break;
+
+                    case "VERTEXES":
+                        lumpType = typeof(VertexesLump);
                         break;
                 }
 
