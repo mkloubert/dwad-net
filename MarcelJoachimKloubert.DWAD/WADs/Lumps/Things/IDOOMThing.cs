@@ -34,13 +34,18 @@ namespace MarcelJoachimKloubert.DWAD.WADs.Lumps.Things
     /// </summary>
     public interface IDOOMThing : IThing
     {
-        #region Properties (1)
+        #region Properties (2)
 
         /// <summary>
         /// Gets the value of <see cref="IThing.Flags" /> as <see cref="DOOMThingFlags" />.
         /// </summary>
         DOOMThingFlags DOOMFlags { get; }
 
-        #endregion Properties (1)
+        /// <summary>
+        /// Gets the DOOM type.
+        /// </summary>
+        DOOMThingType DOOMType { get; }
+
+        #endregion Properties (2)
     }
 }

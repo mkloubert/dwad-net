@@ -34,6 +34,11 @@ namespace MarcelJoachimKloubert.DWAD.WADs.Lumps.Things
     /// </summary>
     public enum DOOMThingType : short
     {
+        /// <summary>
+        /// Unknown
+        /// </summary>
+        UNKNOWN = 0x0000,
+
         #region Ammunition
 
         /// <summary>

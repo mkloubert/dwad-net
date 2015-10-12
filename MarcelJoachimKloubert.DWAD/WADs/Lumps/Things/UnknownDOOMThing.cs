@@ -28,6 +28,7 @@
  **********************************************************************************************************************/
 
 using MarcelJoachimKloubert.DWAD.WADs.Lumps.Things;
+using System;
 
 namespace MarcelJoachimKloubert.DWAD.WADs
 {
@@ -35,14 +36,28 @@ namespace MarcelJoachimKloubert.DWAD.WADs
     {
         internal class UnknownDOOMThing : UnknownThing, IDOOMThing
         {
-            #region Properties (1)
+            #region Properties (2)
 
             public DOOMThingFlags DOOMFlags
             {
                 get { return (DOOMThingFlags)this.Flags; }
             }
 
-            #endregion Properties (1)
+            public DOOMThingType DOOMType
+            {
+                get
+                {
+                    DOOMThingType result;
+                    if (!Enum.TryParse<DOOMThingType>(this.Type.ToString(), out result))
+                    {
+                        result = DOOMThingType.UNKNOWN;
+                    }
+
+                    return result;
+                }
+            }
+
+            #endregion Properties (2)
         }
     }
 }
