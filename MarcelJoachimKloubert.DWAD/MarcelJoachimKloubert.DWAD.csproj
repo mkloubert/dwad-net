@@ -45,8 +45,11 @@
   <ItemGroup>
     <Compile Include="DisposableBase.cs" />
     <Compile Include="ErrorEventArgs.cs" />
+    <Compile Include="Extensions\DOOM2ExtensionsMethods.cs" />
+    <Compile Include="Extensions\_ExtensionsMethods.cs" />
     <Compile Include="IWADFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WADFileBuilder.cs" />
     <Compile Include="WADFileFactory.cs" />
     <Compile Include="WADFormat.cs" />
     <Compile Include="WADObject.cs" />
@@ -55,6 +58,7 @@
     <Compile Include="WADs\Lumps\Linedefs\ILinedefsLump.cs" />
     <Compile Include="WADs\Lumps\Linedefs\Linedef.cs" />
     <Compile Include="WADs\Lumps\Linedefs\LinedefsLump.cs" />
+    <Compile Include="WADs\Lumps\Lump.cs" />
     <Compile Include="WADs\Lumps\Things\DOOMThingFlags.cs" />
     <Compile Include="WADs\Lumps\Things\DOOMThingType.cs" />
     <Compile Include="WADs\Lumps\Things\IDOOMThing.cs" />

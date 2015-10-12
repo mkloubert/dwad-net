@@ -66,7 +66,7 @@ namespace MarcelJoachimKloubert.DWAD.WADs
 
             #endregion Properties (5)
 
-            #region Methods (2)
+            #region Methods (3)
 
             public Stream GetStream()
             {
@@ -113,7 +113,12 @@ namespace MarcelJoachimKloubert.DWAD.WADs
             {
             }
 
-            #endregion Methods (2)
+            public override string ToString()
+            {
+                return (this.Name ?? string.Empty).Trim();
+            }
+
+            #endregion Methods (3)
         }
     }
 }

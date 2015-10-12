@@ -27,122 +27,77 @@
  *                                                                                                                    *
  **********************************************************************************************************************/
 
-using MarcelJoachimKloubert.DWAD.WADs;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
-namespace MarcelJoachimKloubert.DWAD
+namespace MarcelJoachimKloubert.DWAD.WADs.Lumps
 {
     /// <summary>
-    /// WAD file factory.
+    /// A simple lump.
     /// </summary>
-    public static class WADFileFactory
+    public class Lump : DisposableBase, ILump
     {
-        #region Methods (1)
+        #region Properties (4)
 
         /// <summary>
-        /// Creates instances from a stream.
+        /// <see cref="ILump.File" />
         /// </summary>
-        /// <param name="format">The format.</param>
-        /// <param name="stream">The stream.</param>
-        /// <param name="bufferSize">The custom buffer size to use to read from <paramref name="stream" />.</param>
-        /// <returns>The list of lazy loaded instances.</returns>
-        /// <exception cref="ArgumentException">
-        /// <paramref name="stream" /> is not readable.
-        /// </exception>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="stream" /> is <see langword="null" />.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="bufferSize" /> is less than 1.
-        /// </exception>
-        public static IEnumerable<IWADFile> FromStream(Stream stream, WADFormat format = WADFormat.Default, int? bufferSize = null)
+        public IWADFile File
         {
-            if (stream == null)
-            {
-                throw new ArgumentNullException("stream");
-            }
-
-            if (stream.CanRead == false)
-            {
-                throw new ArgumentException("stream");
-            }
-
-            if (bufferSize < 1)
-            {
-                throw new ArgumentOutOfRangeException("bufferSize", bufferSize,
-                                                      "Is less than 1!");
-            }
-
-            bool hasNext;
-
-            do
-            {
-                hasNext = false;
-
-                byte[] buffer;
-
-                buffer = new byte[4];
-                if (stream.Read(buffer, 0, buffer.Length) != buffer.Length)
-                {
-                    continue;
-                }
-
-                var header = Encoding.ASCII.GetString(buffer).ToUpper().Trim();
-
-                IWADFile result = null;
-
-                var wadStream = new MemoryStream();
-                try
-                {
-                    Action copyToWadStream = () =>
-                        {
-                            if (!bufferSize.HasValue)
-                            {
-                                stream.CopyTo(wadStream);
-                            }
-                            else
-                            {
-                                stream.CopyTo(wadStream, bufferSize.Value);
-                            }
-
-                            wadStream.Position = 0;
-                        };
-
-                    switch (header)
-                    {
-                        case "IWAD":
-                            copyToWadStream();
-
-                            result = new IWAD(format, wadStream, true);
-                            break;
-
-                        case "PWAD":
-                            copyToWadStream();
-
-                            result = new PWAD(format, wadStream, true);
-                            break;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    wadStream.Dispose();
-
-                    throw ex;
-                }
-
-                if (result != null)
-                {
-                    hasNext = true;
-
-                    yield return result;
-                }
-            }
-            while (hasNext);
+            get;
+            set;
         }
 
-        #endregion Methods (1)
+        /// <summary>
+        /// <see cref="ILump.Name" />
+        /// </summary>
+        public string Name
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// <see cref="ILump.Position" />
+        /// </summary>
+        public int Position
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// <see cref="ILump.Size" />
+        /// </summary>
+        public int Size
+        {
+            get;
+            set;
+        }
+
+        #endregion Properties (4)
+
+        #region Methods (3)
+
+        /// <summary>
+        /// <see cref="ILump.GetStream()" />
+        /// </summary>
+        public Stream GetStream()
+        {
+            return this.InvokeForDisposable<Stream>(
+                func: (obj) =>
+                    {
+                        throw new NotImplementedException();
+                    });
+        }
+
+        /// <summary>
+        /// <see cref="DisposableBase.OnDispose(bool, ref bool)" />
+        /// </summary>
+        protected override void OnDispose(bool disposing, ref bool isDisposed)
+        {
+        }
+
+        #endregion Methods (3)
     }
 }

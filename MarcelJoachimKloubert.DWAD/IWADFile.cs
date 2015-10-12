@@ -28,8 +28,10 @@
  **********************************************************************************************************************/
 
 using MarcelJoachimKloubert.DWAD.WADs.Lumps;
+using MarcelJoachimKloubert.DWAD.WADs.Lumps.Things;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace MarcelJoachimKloubert.DWAD
 {
@@ -38,7 +40,7 @@ namespace MarcelJoachimKloubert.DWAD
     /// </summary>
     public interface IWADFile : IDisposable
     {
-        #region Methods (1)
+        #region Methods (3)
 
         /// <summary>
         /// Enumerates all lumps of that WAD file.
@@ -46,7 +48,19 @@ namespace MarcelJoachimKloubert.DWAD
         /// <returns>The sequence of lumps.</returns>
         IEnumerable<ILump> EnumerateLumps();
 
-        #endregion Methods (1)
+        /// <summary>
+        /// Enumerates all things.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<IThing> EnumerateThings();
+
+        /// <summary>
+        /// Gets a new stream with the data of the file.
+        /// </summary>
+        /// <returns>The new stream.</returns>
+        Stream GetStream();
+
+        #endregion Methods (3)
 
         #region Properties (2)
 
@@ -60,6 +74,6 @@ namespace MarcelJoachimKloubert.DWAD
         /// </summary>
         WADType Type { get; }
 
-        #endregion Properties (1)
+        #endregion Properties (2)
     }
 }

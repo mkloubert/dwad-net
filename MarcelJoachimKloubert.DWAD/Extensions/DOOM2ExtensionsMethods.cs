@@ -27,120 +27,74 @@
  *                                                                                                                    *
  **********************************************************************************************************************/
 
-using MarcelJoachimKloubert.DWAD.WADs;
+using MarcelJoachimKloubert.DWAD.WADs.Lumps;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 
-namespace MarcelJoachimKloubert.DWAD
+namespace MarcelJoachimKloubert.DWAD.Extensions
 {
     /// <summary>
-    /// WAD file factory.
+    /// Extensions methods for DOOM 2.
     /// </summary>
-    public static class WADFileFactory
+    static partial class WADExtensionsMethods
     {
         #region Methods (1)
 
         /// <summary>
-        /// Creates instances from a stream.
+        /// Enumerates over the DOOM 2 maps.
         /// </summary>
-        /// <param name="format">The format.</param>
-        /// <param name="stream">The stream.</param>
-        /// <param name="bufferSize">The custom buffer size to use to read from <paramref name="stream" />.</param>
-        /// <returns>The list of lazy loaded instances.</returns>
-        /// <exception cref="ArgumentException">
-        /// <paramref name="stream" /> is not readable.
-        /// </exception>
+        /// <param name="wadFile">The IWAD file.</param>
+        /// <returns>The list of maps.</returns>
         /// <exception cref="ArgumentNullException">
-        /// <paramref name="stream" /> is <see langword="null" />.
+        /// <paramref name="wadFile" /> is <see langword="null" />.
         /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="bufferSize" /> is less than 1.
+        /// <exception cref="FormatException">
+        /// <paramref name="wadFile" /> has an invalid value in <see cref="IWADFile.Format" />.
         /// </exception>
-        public static IEnumerable<IWADFile> FromStream(Stream stream, WADFormat format = WADFormat.Default, int? bufferSize = null)
+        public static IEnumerable<IWADFile> EnumerateDOOM2Maps(this IWADFile wadFile)
         {
-            if (stream == null)
+            if (wadFile == null)
             {
-                throw new ArgumentNullException("stream");
+                throw new ArgumentNullException("wadFile");
             }
 
-            if (stream.CanRead == false)
+            if (wadFile.Format != WADFormat.Default)
             {
-                throw new ArgumentException("stream");
+                throw new FormatException("wadFile");
             }
 
-            if (bufferSize < 1)
+            using (var stream = wadFile.GetStream())
             {
-                throw new ArgumentOutOfRangeException("bufferSize", bufferSize,
-                                                      "Is less than 1!");
-            }
-
-            bool hasNext;
-
-            do
-            {
-                hasNext = false;
-
-                byte[] buffer;
-
-                buffer = new byte[4];
-                if (stream.Read(buffer, 0, buffer.Length) != buffer.Length)
+                ILump mapLump = null;
+                IList<ILump> lumpsOfMap = null;
+                foreach (var lump in wadFile.EnumerateLumps())
                 {
-                    continue;
-                }
-
-                var header = Encoding.ASCII.GetString(buffer).ToUpper().Trim();
-
-                IWADFile result = null;
-
-                var wadStream = new MemoryStream();
-                try
-                {
-                    Action copyToWadStream = () =>
-                        {
-                            if (!bufferSize.HasValue)
-                            {
-                                stream.CopyTo(wadStream);
-                            }
-                            else
-                            {
-                                stream.CopyTo(wadStream, bufferSize.Value);
-                            }
-
-                            wadStream.Position = 0;
-                        };
-
-                    switch (header)
+                    if ((lump.Name ?? string.Empty).ToUpper().Trim().StartsWith("MAP"))
                     {
-                        case "IWAD":
-                            copyToWadStream();
+                        if (lumpsOfMap != null)
+                        {
+                            using (var builder = new WADFileBuilder(true))
+                            {
+                                builder.AddRange(lumpsOfMap);
 
-                            result = new IWAD(format, wadStream, true);
-                            break;
+                                yield return builder.Build(mapLump.Name, WADFormat.Default);
+                            }
+                        }
 
-                        case "PWAD":
-                            copyToWadStream();
+                        mapLump = lump;
+                        lumpsOfMap = new List<ILump>();
 
-                            result = new PWAD(format, wadStream, true);
-                            break;
+                        continue;
                     }
-                }
-                catch (Exception ex)
-                {
-                    wadStream.Dispose();
 
-                    throw ex;
-                }
+                    if (mapLump == null)
+                    {
+                        continue;
+                    }
 
-                if (result != null)
-                {
-                    hasNext = true;
-
-                    yield return result;
+                    lumpsOfMap.Add(lump);
                 }
             }
-            while (hasNext);
         }
 
         #endregion Methods (1)

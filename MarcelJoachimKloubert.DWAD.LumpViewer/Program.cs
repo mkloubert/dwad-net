@@ -27,53 +27,24 @@
  *                                                                                                                    *
  **********************************************************************************************************************/
 
-using MarcelJoachimKloubert.DWAD.WADs.Lumps.Things;
+using MarcelJoachimKloubert.DWAD.LumpViewer.Forms;
 using System;
+using System.Windows.Forms;
 
-namespace MarcelJoachimKloubert.DWAD.WADs
+namespace MarcelJoachimKloubert.DWAD.LumpViewer
 {
-    partial class WADFileBase
+    internal static class Program
     {
-        internal class UnknownDOOMThing : UnknownThing, IDOOMThing
+        #region Methods (1)
+
+        [STAThread]
+        private static void Main()
         {
-            #region Properties (2)
-
-            public DOOMThingFlags DOOMFlags
-            {
-                get { return (DOOMThingFlags)this.Flags; }
-            }
-
-            public DOOMThingType DOOMType
-            {
-                get
-                {
-                    DOOMThingType result;
-                    if (!Enum.TryParse<DOOMThingType>(this.Type.ToString(), out result))
-                    {
-                        result = DOOMThingType.UNKNOWN;
-                    }
-
-                    return result;
-                }
-            }
-
-            #endregion Properties (2)
-
-            #region Methods (1)
-
-            public override string ToString()
-            {
-                if (this.DOOMType == DOOMThingType.UNKNOWN)
-                {
-                    return base.ToString();
-                }
-
-                return string.Format("[{0}] {1} @ ({2}, {3})",
-                                     this.Index, this.DOOMType,
-                                     this.X, this.Y);
-            }
-
-            #endregion Methods (1)
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new MainForm());
         }
+
+        #endregion Methods (1)
     }
 }

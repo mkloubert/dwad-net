@@ -28,9 +28,11 @@
  **********************************************************************************************************************/
 
 using MarcelJoachimKloubert.DWAD.WADs.Lumps;
+using MarcelJoachimKloubert.DWAD.WADs.Lumps.Things;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace MarcelJoachimKloubert.DWAD.WADs
@@ -134,7 +136,7 @@ namespace MarcelJoachimKloubert.DWAD.WADs
 
         #endregion Properties (3)
 
-        #region Methods (9)
+        #region Methods (11)
 
         /// <summary>
         /// <see cref="IWADFile.EnumerateLumps()" />.
@@ -142,6 +144,17 @@ namespace MarcelJoachimKloubert.DWAD.WADs
         public IEnumerable<ILump> EnumerateLumps()
         {
             return this.InvokeForStream(func: EnumerateLumps);
+        }
+
+        /// <summary>
+        /// <see cref="IWADFile.EnumerateThings()" />.
+        /// </summary>
+        public IEnumerable<IThing> EnumerateThings()
+        {
+            return this.EnumerateLumps()
+                       .OfType<IThingsLump>()
+                       .SelectMany(x => x.EnumerateThings())
+                       .OfType<IThing>();
         }
 
         /// <summary>
@@ -181,7 +194,7 @@ namespace MarcelJoachimKloubert.DWAD.WADs
                     yield break;
                 }
 
-                var lumpPos = ToInt32(buffer).Value - FILE_ID_SIZE;
+                var lumpPos = ToInt32(buffer).Value;
 
                 buffer = new byte[4];
                 if ((stream.Read(buffer, 0, buffer.Length)) != buffer.Length)
@@ -225,7 +238,7 @@ namespace MarcelJoachimKloubert.DWAD.WADs
                     var result = (UnknownLump)Activator.CreateInstance(lumpType);
                     result.File = file;
                     result.Name = lumpName;
-                    result.Position = lumpPos + FILE_ID_SIZE;
+                    result.Position = lumpPos;
                     result.Size = lumpSize;
 
                     yield return result;
@@ -234,17 +247,33 @@ namespace MarcelJoachimKloubert.DWAD.WADs
         }
 
         /// <summary>
-        /// <see cref="DisposableBase.OnDispose(bool, ref bool)" />
+        /// <see cref="IWADFile.GetStream()" />.
         /// </summary>
-        protected override void OnDispose(bool disposing, ref bool isDisposed)
+        public Stream GetStream()
         {
-            if (disposing)
-            {
-                if (this._OWNS_STREAM)
+            return this.InvokeForStream(func: (file, stream) =>
                 {
-                    this.Stream.Dispose();
-                }
-            }
+                    var result = new MemoryStream();
+                    try
+                    {
+                        stream.Position = 0;
+
+                        var header = Encoding.ASCII.GetBytes(this.Type.ToString().ToUpper());
+                        result.Write(header, 0, header.Length);
+
+                        stream.CopyTo(result);
+
+                        result.Position = 0;
+                    }
+                    catch (Exception ex)
+                    {
+                        result.Dispose();
+
+                        throw ex;
+                    }
+
+                    return result;
+                });
         }
 
         /// <summary>
@@ -432,6 +461,20 @@ namespace MarcelJoachimKloubert.DWAD.WADs
                     });
         }
 
-        #endregion Methods (9)
+        /// <summary>
+        /// <see cref="DisposableBase.OnDispose(bool, ref bool)" />
+        /// </summary>
+        protected override void OnDispose(bool disposing, ref bool isDisposed)
+        {
+            if (disposing)
+            {
+                if (this._OWNS_STREAM)
+                {
+                    this.Stream.Dispose();
+                }
+            }
+        }
+
+        #endregion Methods (11)
     }
 }

@@ -27,53 +27,12 @@
  *                                                                                                                    *
  **********************************************************************************************************************/
 
-using MarcelJoachimKloubert.DWAD.WADs.Lumps.Things;
-using System;
-
-namespace MarcelJoachimKloubert.DWAD.WADs
+namespace MarcelJoachimKloubert.DWAD.Extensions
 {
-    partial class WADFileBase
+    /// <summary>
+    /// Extensions methods.
+    /// </summary>
+    public static partial class WADExtensionsMethods
     {
-        internal class UnknownDOOMThing : UnknownThing, IDOOMThing
-        {
-            #region Properties (2)
-
-            public DOOMThingFlags DOOMFlags
-            {
-                get { return (DOOMThingFlags)this.Flags; }
-            }
-
-            public DOOMThingType DOOMType
-            {
-                get
-                {
-                    DOOMThingType result;
-                    if (!Enum.TryParse<DOOMThingType>(this.Type.ToString(), out result))
-                    {
-                        result = DOOMThingType.UNKNOWN;
-                    }
-
-                    return result;
-                }
-            }
-
-            #endregion Properties (2)
-
-            #region Methods (1)
-
-            public override string ToString()
-            {
-                if (this.DOOMType == DOOMThingType.UNKNOWN)
-                {
-                    return base.ToString();
-                }
-
-                return string.Format("[{0}] {1} @ ({2}, {3})",
-                                     this.Index, this.DOOMType,
-                                     this.X, this.Y);
-            }
-
-            #endregion Methods (1)
-        }
     }
 }

@@ -34,7 +34,7 @@ namespace MarcelJoachimKloubert.DWAD.WADs.Lumps.Things
     /// </summary>
     public interface IThing
     {
-        #region Properties (5)
+        #region Properties (7)
 
         /// <summary>
         /// Gets the angle facing.
@@ -45,6 +45,16 @@ namespace MarcelJoachimKloubert.DWAD.WADs.Lumps.Things
         /// Gets the flags.
         /// </summary>
         short Flags { get; }
+
+        /// <summary>
+        /// Get the zero based index.
+        /// </summary>
+        int Index { get; }
+
+        /// <summary>
+        /// Gets the underlying lump.
+        /// </summary>
+        IThingsLump Lump { get; }
 
         /// <summary>
         /// Gets the type ID.
@@ -61,6 +71,6 @@ namespace MarcelJoachimKloubert.DWAD.WADs.Lumps.Things
         /// </summary>
         short Y { get; }
 
-        #endregion Properties (5)
+        #endregion Properties (7)
     }
 }

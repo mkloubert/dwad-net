@@ -35,7 +35,7 @@ namespace MarcelJoachimKloubert.DWAD.WADs
     {
         internal class UnknownThing : IThing
         {
-            #region Properties (5)
+            #region Properties (8)
 
             public short Angle
             {
@@ -47,6 +47,23 @@ namespace MarcelJoachimKloubert.DWAD.WADs
             {
                 get;
                 internal set;
+            }
+
+            public int Index
+            {
+                get;
+                internal set;
+            }
+
+            internal ThingsLump Lump
+            {
+                get;
+                set;
+            }
+
+            IThingsLump IThing.Lump
+            {
+                get { return this.Lump; }
             }
 
             public short Type
@@ -67,7 +84,18 @@ namespace MarcelJoachimKloubert.DWAD.WADs
                 internal set;
             }
 
-            #endregion Properties (5)
+            #endregion Properties (8)
+
+            #region Methods (1)
+
+            public override string ToString()
+            {
+                return string.Format("[{0}] {1} @ ({2}, {3})",
+                                     this.Index, this.Type,
+                                     this.X, this.Y);
+            }
+
+            #endregion Methods (1)
         }
     }
 }

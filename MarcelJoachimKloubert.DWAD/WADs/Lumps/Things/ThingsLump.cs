@@ -49,6 +49,7 @@ namespace MarcelJoachimKloubert.DWAD.WADs
                             {
                                 bool hasNext;
 
+                                var index = -1;
                                 do
                                 {
                                     hasNext = false;
@@ -110,6 +111,8 @@ namespace MarcelJoachimKloubert.DWAD.WADs
 
                                         thing.Angle = angle;
                                         thing.Flags = flags;
+                                        thing.Index = ++index;
+                                        thing.Lump = this;
                                         thing.Type = type;
                                         thing.X = x;
                                         thing.Y = y;

@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcelJoachimKloubert.DWAD.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcelJoachimKloubert.DWAD.MapViewer", "MarcelJoachimKloubert.DWAD.MapViewer\MarcelJoachimKloubert.DWAD.MapViewer.csproj", "{79E6FE06-7F65-418A-9BFC-5E4C1A5DDEB9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{F66F41F2-3625-4010-B2F3-144B652041E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarcelJoachimKloubert.DWAD.LumpViewer", "MarcelJoachimKloubert.DWAD.LumpViewer\MarcelJoachimKloubert.DWAD.LumpViewer.csproj", "{60AC38EF-1A3E-4419-91D1-180EC0BEC2B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +31,16 @@ Global
 		{79E6FE06-7F65-418A-9BFC-5E4C1A5DDEB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79E6FE06-7F65-418A-9BFC-5E4C1A5DDEB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79E6FE06-7F65-418A-9BFC-5E4C1A5DDEB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60AC38EF-1A3E-4419-91D1-180EC0BEC2B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60AC38EF-1A3E-4419-91D1-180EC0BEC2B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60AC38EF-1A3E-4419-91D1-180EC0BEC2B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60AC38EF-1A3E-4419-91D1-180EC0BEC2B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{79E6FE06-7F65-418A-9BFC-5E4C1A5DDEB9} = {F66F41F2-3625-4010-B2F3-144B652041E2}
+		{60AC38EF-1A3E-4419-91D1-180EC0BEC2B0} = {F66F41F2-3625-4010-B2F3-144B652041E2}
 	EndGlobalSection
 EndGlobal

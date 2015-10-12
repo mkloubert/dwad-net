@@ -81,7 +81,7 @@ namespace MarcelJoachimKloubert.DWAD
 
         #endregion Properties (1)
 
-        #region Methods (13)
+        #region Methods (14)
 
         /// <summary>
         /// Returns a sequence as array.
@@ -113,6 +113,21 @@ namespace MarcelJoachimKloubert.DWAD
 
             // LINQ style
             return seq.ToArray();
+        }
+
+        /// <summary>
+        /// Returns the binary data for a <see cref="int" /> value.
+        /// </summary>
+        /// <param name="value">The input value.</param>
+        /// <returns>The output value.</returns>
+        public static byte[] GetBytes(int? value)
+        {
+            if (!value.HasValue)
+            {
+                return null;
+            }
+
+            return AsArray(UpdateByteOrder(BitConverter.GetBytes(value.Value)));
         }
 
         /// <summary>
@@ -396,6 +411,6 @@ namespace MarcelJoachimKloubert.DWAD
             return bytes;
         }
 
-        #endregion Methods (13)
+        #endregion Methods (14)
     }
 }
