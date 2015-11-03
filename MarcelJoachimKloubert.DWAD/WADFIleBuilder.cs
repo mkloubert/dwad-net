@@ -60,7 +60,7 @@ namespace MarcelJoachimKloubert.DWAD
         /// <summary>
         /// Initializes a new instance of the <see cref="WADFileBuilder" /> class.
         /// </summary>
-        /// <param name="ownsLumps">The value for the <see cref="WADFileBuilder._OWNS_LUMPS" /> firls.</param>
+        /// <param name="ownsLumps">The value for the <see cref="WADFileBuilder._OWNS_LUMPS" /> field.</param>
         public WADFileBuilder(bool ownsLumps = true)
         {
             this._OWNS_LUMPS = ownsLumps;
@@ -94,9 +94,9 @@ namespace MarcelJoachimKloubert.DWAD
                         return builder;
                     },
                 funcState: new
-                {
-                    Lump = lump,
-                });
+                    {
+                        Lump = lump,
+                    });
         }
 
         /// <summary>
@@ -150,9 +150,10 @@ namespace MarcelJoachimKloubert.DWAD
                 throw new ArgumentException("initialLumpName");
             }
 
-            if (initialLumpName.Length > 8)
+            var initialLumpNameLength = Encoding.ASCII.GetBytes(initialLumpName).Length;
+            if (initialLumpNameLength > 8)
             {
-                throw new ArgumentOutOfRangeException("initialLumpName.Length", initialLumpName.Length,
+                throw new ArgumentOutOfRangeException("initialLumpName.Length", initialLumpNameLength,
                                                       "Cannot be larger than 8 chars!");
             }
 
@@ -208,7 +209,13 @@ namespace MarcelJoachimKloubert.DWAD
                                 var lumpNameChars = new List<byte>(Encoding.ASCII.GetBytes(nl.Name ?? string.Empty));
                                 while (lumpNameChars.Count < 8)
                                 {
-                                    lumpNameChars.Add(0);
+                                    lumpNameChars.Add(0);  // fill with zero chars
+                                }
+
+                                if (lumpNameChars.Count > 8)
+                                {
+                                    throw new ArgumentOutOfRangeException("lumpNameChars.Count", lumpNameChars.Count,
+                                                                          "Cannot be larger than 8 chars!");
                                 }
 
                                 var lumpPos = GetBytes(nl.Position);
@@ -226,12 +233,13 @@ namespace MarcelJoachimKloubert.DWAD
                             temp.Write(GetBytes(posOfEntries), 0, 4);
 
                             temp.Position = 0;
-                            return WADFileFactory.FromStream(temp, format).Single();
+                            return WADFileFactory.FromStream(temp, state.Format).Single();
                         }
                     },
                 funcState: new
                     {
                         FirstLumpName = initialLumpName,
+                        Format = format,
                     });
         }
 

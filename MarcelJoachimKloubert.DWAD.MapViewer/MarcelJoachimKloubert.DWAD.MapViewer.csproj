@@ -64,6 +64,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="..\LICENSE">
+      <Link>LICENSE</Link>
+    </EmbeddedResource>
     <None Include="files\mitnal.WAD">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -49,7 +49,7 @@ namespace MarcelJoachimKloubert.DWAD
 
         #endregion Constructors (1)
 
-        #region Methods (1)
+        #region Properties (1)
 
         /// <summary>
         /// Gets the underlying exception (if defined).
@@ -60,6 +60,6 @@ namespace MarcelJoachimKloubert.DWAD
             private set;
         }
 
-        #endregion Methods (1)
+        #endregion Properties (1)
     }
 }
